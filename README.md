@@ -20,3 +20,34 @@ Small Laptop:- 1024px-1279px width;
 
 
 Icons:- majority i take lucide icon and plush-slash-minus icon from  this website https://icons.getbootstrap.com/icons/plus-slash-minus/ 
+
+
+color:-
+
+night/halfmoon:- 
+
+calculator number plate:-#2A2C38
+calculator button backgroung color:-#282B34
+calculator number color and big outcome number color:#F9FCFD
+multiple to equal icon text color:-#79515A
+AC to percentage icon txt color:-#63BEB5
+calculator number text color :-#A2A6A9
+calcaulation display backgrounf color:-#22252E
+
+toggle:- backgroung color:-#292B37
+
+offtime halfmoon icon color text-#E2E2E2
+offtime sun icon color text:-#262932
+
+ontime halfmoon icon color text:-#E0E0E0
+
+
+sun icon:-
+
+calculator number plate:-#F7F7F7
+calculator button backgroung color:-#F7F7F7
+calculator number color and big outcome number color:#313035
+multiple to equal icon text color:-#79515A
+AC to percentage icon txt color:-#63BEB5
+calculator number text color :-#A2A6A9
+calcaulation display backgrounf color:-#FFFFFF
