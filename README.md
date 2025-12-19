@@ -4,7 +4,7 @@ Project complete or Desire Outcome:-
 Project Duration: 2 day (7 evening in 18 dec to 7 evening in 20 dec).
 
 responsive:-
-sm = after 640px 
+sm = after 640px ;
 md = after 768px whole screen or between 768px to 1024px ;
 lg = after 1024px whole screen or between 1024px to 1200px ;
 xl = after 1200px whole screen or between 1200px to 1400px;
@@ -18,3 +18,5 @@ Small Laptop:- 1024px-1279px width;
  desktop :- 1280px-1535px width; 
  Large Desktop:-1535px width
 
+
+Icons:- majority i take lucide icon and plush-slash-minus icon from  this website https://icons.getbootstrap.com/icons/plus-slash-minus/ 
