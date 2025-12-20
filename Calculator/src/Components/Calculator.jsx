@@ -4,8 +4,8 @@ const Calculator = () => {
   return (
     <>
       <div className="w-screen h-screen bg-gray-400">
-        <div className="w-full h-full small-mobile:flex justify-center items-center bg-gray-200 max-small-mobile:bg-red-500">
-          <div className=" rounded-4xl max-small-mobile:w-full max-small-mobile:h-full max-small-mobile:bg-white  max-large-mobile:w-80 max-large-mobile:h-[80%] max-large-mobile:bg-red-500 max-tablet:w-102 max-tablet:h-[80%] max-tablet:bg-red-500 max-small-laptop:h-[80%] max-small-laptop:w-122 max-small-laptop:bg-pink-500 desktop:h-[80%] desktop:w-100 desktop:bg-amber-600 "></div>
+        <div className="w-full h-full small-mobile:flex justify-center items-center bg-gray-200">
+          <div className=" rounded-4xl bg-white max-small-mobile:w-full max-small-mobile:h-full  max-large-mobile:w-80 max-large-mobile:h-[80%] 0 max-tablet:w-102 max-tablet:h-[80%] max-small-laptop:h-[80%] max-small-laptop:w-122  desktop:h-[80%] desktop:w-100 "></div>
         </div>
       </div>
     </>
