@@ -3,7 +3,11 @@ import React from "react";
 const Calculator = () => {
   return (
     <>
-      <div className="w-screen h-screen "></div>
+      <div className="w-screen h-screen ">
+        <div className="w-full h-full small-mobile:flex justify-center items-center bg-gray-200 max-small-mobile:bg-red-500">
+          <div className="max-small-mobile:w-full max-small-mobile:h-full max-small-mobile:bg-white  max-large-mobile:w-80 max-large-mobile:h-[80%] max-large-mobile:bg-red-500 max-tablet:w-102.95 max-tablet:h-225 max-tablet:bg-amber-50 "></div>
+        </div>
+      </div>
     </>
   );
 };
