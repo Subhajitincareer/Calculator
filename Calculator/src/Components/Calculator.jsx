@@ -1,130 +1,194 @@
-import React from "react";
+import { useState } from "react";
 import {
-  RotateCcw,
-  Percent,
+  Sun,
+  Moon,
   Divide,
   X,
   Minus,
   Plus,
   Equal,
-  Sun,
-  Moon,
+  Percent,
+  RotateCcw,
 } from "lucide-react";
-import { useState } from "react";
-const Calculator = () => {
-  const [toggle, settoggle] = useState(false);
 
-  function handleZeroClick() {
-    alert("You clicked 0");
+/* ----------------- SAFE MATH ENGINE ----------------- */
+function calculate(expression) {
+  try {
+    const tokens = expression.match(/(\d+\.?\d*|\+|\-|\*|\/)/g);
+    if (!tokens) return "";
+
+    const stack = [];
+    let current = Number(tokens[0]);
+
+    for (let i = 1; i < tokens.length; i += 2) {
+      const op = tokens[i];
+      const next = Number(tokens[i + 1]);
+
+      if (op === "*") current *= next;
+      else if (op === "/") current /= next;
+      else {
+        stack.push(current);
+        stack.push(op);
+        current = next;
+      }
+    }
+    stack.push(current);
+
+    let result = stack[0];
+    for (let i = 1; i < stack.length; i += 2) {
+      if (stack[i] === "+") result += stack[i + 1];
+      if (stack[i] === "-") result -= stack[i + 1];
+    }
+    return String(+result.toFixed(8));
+  } catch {
+    return "Error";
   }
-
-  return (
-    <>
-      <div className="w-screen h-screen bg-white">
-        <div className="w-full h-full small-mobile:flex justify-center items-center bg-white">
-          <div className="rounded-4xl bg-white max-small-mobile:w-full max-small-mobile:h-full  max-large-mobile:w-80 max-large-mobile:h-[80%] 0 max-tablet:w-102 max-tablet:h-[80%] max-small-laptop:h-[80%] max-small-laptop:w-122  desktop:h-[80%] desktop:w-100 ">
-            <div
-              className={`w-full h-[40%] border-t border-l border-r rounded-tl-4xl rounded-tr-4xl ${
-                toggle ? "bg-black" : "bg-white"
-              }`}
-            >
-              <div className="w-full h-auto flex justify-center p-2">
-                <div className="w-[25%] flex bg-gray-600 rounded-3xl p-1">
-                  <div className="w-full ">
-                    <Sun
-                      className={`${toggle ? "text-gray-500" : "text-white"}`}
-                      onClick={() => settoggle(false)}
-                    />
-                  </div>
-                  <div 
-                  >
-                    <Moon   className={`${toggle ? "text-white" : "text-gray-500"}`}
-                    onClick={() => settoggle(true)}/>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="w-full h-[60%] bg-gray-200 grid grid-cols-4 rounded-tl-3xl rounded-br-4xl rounded-bl-4xl rounded-tr-4xl">
-              <div className="h-full  grid grid-rows-5 place-items-center auto-cols-fr">
-                <button className=" text-3xl bg-gray-300 text-[#63BEB5] ">
-                  AC
-                </button>
-                <button className="text-3xl">7</button>
-                <button className="text-3xl">4</button>
-                <button className="text-3xl">1</button>
-                <button className="text-3xl">
-                  <RotateCcw />
-                </button>
-              </div>
-              <div className="h-full  grid grid-rows-5 place-items-center auto-cols-fr">
-                <button className="text-3xl bg-gray-300 text-[#63BEB5]">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="30"
-                    height="30"
-                    fill="currentColor"
-                    class="bi bi-plus-slash-minus"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="m1.854 14.854 13-13a.5.5 0 0 0-.708-.708l-13 13a.5.5 0 0 0 .708.708M4 1a.5.5 0 0 1 .5.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2A.5.5 0 0 1 4 1m5 11a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5A.5.5 0 0 1 9 12" />
-                  </svg>
-                </button>
-                <button className="text-3xl">8</button>
-                <button className="text-3xl">5</button>
-                <button className="text-3xl">2</button>
-                <button className="text-3xl" onClick={handleZeroClick}>
-                  0
-                </button>
-              </div>
-              <div className="h-full  grid grid-rows-5 place-items-center auto-cols-fr">
-                <button className="text-3xl bg-gray-300 text-[#63BEB5]">
-                  <Percent />
-                </button>
-                <button className="text-3xl">9</button>
-                <button className="text-3xl">6</button>
-                <button className="text-3xl">3</button>
-                <button className="text-3xl">.</button>
-              </div>
-              <div className="h-full  grid grid-rows-5 place-items-center auto-rows-fr">
-                <button className="text-3xl bg-gray-300 text-[#79515A]">
-                  <Divide />
-                </button>
-                <button className="text-3xl bg-gray-300 text-[#79515A]">
-                  <X />
-                </button>
-                <button className="text-3xl bg-gray-300 text-[#79515A]">
-                  <Minus />
-                </button>
-                <button className="text-3xl bg-gray-300 text-[#79515A]">
-                  <Plus />
-                </button>
-                <button className="text-xl bg-gray-300 text-[#79515A]">
-                  <Equal />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-{
-  /*     <div className="w-screen h-screen flex justify-center items-center bg-gray-200 small-mobile:w-screen small-mobile:h-screen small-mobile:bg-red-500">
-      <div className="w-96 h-96 bg-amber-200 grid grid-cols-4">
-        <div className="h-full bg-amber-700 flex flex-col items-center gap-10">
-          <div className="text-3GITHUBxl">2</div>
-          <div className="text-3xl">3</div>
-          <div className="text-3xl">4</div>
-          <div className="text-3xl">5</div>
-          <div className="text-3xl">1</div>
-        </div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div> */
 }
 
-export default Calculator;
+/* ----------------- COMPONENT ----------------- */
+export default function Calculator() {
+  const [dark, setDark] = useState(true);
+  const [input, setInput] = useState("");
+  const [expression, setExpression] = useState("");
+
+  const addValue = (val) => {
+    setInput((p) => p + val);
+  };
+
+  const addOperator = (op) => {
+    if (!input) return;
+    setExpression((p) => p + input + " " + op + " ");
+    setInput("");
+  };
+
+  const handleEqual = () => {
+    if (!input) return;
+    const full = (expression + input).replace(/×/g, "*").replace(/÷/g, "/");
+    const result = calculate(full);
+    setExpression("");
+    setInput(result);
+  };
+
+  const handlePercent = () => {
+    if (!input) return;
+    setInput(String(Number(input) / 100));
+  };
+
+  const backspace = () => {
+    setInput((p) => p.slice(0, -1));
+  };
+
+  const clearAll = () => {
+    setInput("");
+    setExpression("");
+  };
+
+  return (
+    <div
+      className={`w-screen h-screen flex justify-center items-center ${
+        dark ? "bg-neutral-900" : "bg-gray-200"
+      }`}
+    >
+      {/* Phone */}
+      <div
+        className={`w-[320px] h-[650px] rounded-[36px] shadow-2xl overflow-hidden ${
+          dark ? "bg-[#1E232B] text-white" : "bg-white text-black"
+        }`}
+      >
+        {/* Display */}
+        <div className="h-[35%] px-6 pt-6 flex flex-col justify-between">
+          {/* Theme toggle */}
+          <div className="flex justify-center">
+            <div
+              className={`flex gap-3 px-4 py-2 rounded-full ${
+                dark ? "bg-[#2A2F38]" : "bg-gray-100"
+              }`}
+            >
+              <Sun
+                size={18}
+                onClick={() => setDark(false)}
+                className={dark ? "text-gray-500" : "text-black"}
+              />
+              <Moon
+                size={18}
+                onClick={() => setDark(true)}
+                className={dark ? "text-white" : "text-gray-400"}
+              />
+            </div>
+          </div>
+
+          {/* Expression */}
+          <div className="text-center text-sm opacity-60">{expression}</div>
+
+          {/* Result */}
+          <div className="text-center text-4xl font-semibold break-all">
+            {input || "0"}
+          </div>
+        </div>
+
+        {/* Keypad */}
+        <div
+          className={`h-[65%] grid grid-cols-4 px-6 py-4 gap-y-6 ${
+            dark ? "bg-[#1A1F26]" : "bg-gray-50"
+          }`}
+        >
+          <Btn accent onClick={clearAll}>
+            AC
+          </Btn>
+          <Btn accent onClick={backspace}>
+            <RotateCcw size={18} />
+          </Btn>
+          <Btn accent onClick={handlePercent}>
+            <Percent size={18} />
+          </Btn>
+          <Btn operator onClick={() => addOperator("÷")}>
+            <Divide size={18} />
+          </Btn>
+
+          <Btn onClick={() => addValue("7")}>7</Btn>
+          <Btn onClick={() => addValue("8")}>8</Btn>
+          <Btn onClick={() => addValue("9")}>9</Btn>
+          <Btn operator onClick={() => addOperator("×")}>
+            <X size={18} />
+          </Btn>
+
+          <Btn onClick={() => addValue("4")}>4</Btn>
+          <Btn onClick={() => addValue("5")}>5</Btn>
+          <Btn onClick={() => addValue("6")}>6</Btn>
+          <Btn operator onClick={() => addOperator("-")}>
+            <Minus size={18} />
+          </Btn>
+
+          <Btn onClick={() => addValue("1")}>1</Btn>
+          <Btn onClick={() => addValue("2")}>2</Btn>
+          <Btn onClick={() => addValue("3")}>3</Btn>
+          <Btn operator onClick={() => addOperator("+")}>
+            <Plus size={18} />
+          </Btn>
+
+          <Btn />
+          <Btn onClick={() => addValue("0")}>0</Btn>
+          <Btn onClick={() => addValue(".")}>.</Btn>
+          <Btn operator onClick={handleEqual}>
+            <Equal size={18} />
+          </Btn>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------- BUTTON ----------------- */
+function Btn({ children, operator, accent, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`h-12 rounded-xl flex items-center justify-center text-lg transition
+      ${
+        operator ? "text-red-400" : accent ? "text-teal-400" : ""
+      } hover:opacity-80`}
+    >
+      {children}
+    </button>
+  );
+}
